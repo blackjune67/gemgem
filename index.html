@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="overlay"></div>
+    <div class="card"></div>
+</div>
+
+<script>
+    var container = document.querySelector('.container');
+    var overlay = document.querySelector('.overlay');
+    container.addEventListener('mousemove', function (e) {
+        var offsetX = e.offsetX;
+        var offsetY = e.offsetY;
+
+        var rotateY = -1 / 5 * offsetX + 20;
+        var rotateX = 4 / 30 * offsetY - 20;
+
+        overlay.style = `background-position : ${offsetX / 5 + offsetY / 5}%; filter : opacity(${offsetX / 200}) brightness(1.2)`;
+        container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    container.addEventListener('mouseout', function(){
+        overlay.style = 'filter : opacity(0)'
+        container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
+    })
+</script>
+
+<style>
+    .container {
+        width: 220px;
+        height: 310px;
+        transition: all 0.1s;
+        position: relative;
+        /*overflow: hidden;*/
+    }
+
+    .overlay {
+        position: absolute;
+        width: 220px;
+        height: 310px;
+        background: linear-gradient(
+                105deg, transparent 40%,
+/*                rgba(255, 219, 112, 0.8) 45%,
+                rgba(132, 50, 255, 0.6) 50%,*/
+                rgba(70, 42, 7, 0.8) 45%,
+                rgba(132, 50, 255, 0.6) 50%,
+                transparent 54%);
+        filter: brightness(1.1) opacity(0.8);
+        mix-blend-mode: color-dodge;
+        background-size: 150% 150%;
+        background-position: 100%;
+        transition: all 0.1s;
+        /*border-radius: 10px;*/
+    }
+
+    .card {
+        width: 220px;
+        height: 310px;
+        background-image: url(gemgem.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 10px;
+    }
+</style>
+
+</body>
+</html>
